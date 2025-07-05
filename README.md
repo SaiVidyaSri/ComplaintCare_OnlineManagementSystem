@@ -1,2 +1,2 @@
 # ResolveNow-Your-Platform-for-Online-Complaints
-ResolveNow is a web-based platform that allows users to file, track, and manage online complaints efficiently. Designed for transparency and user convenience, it streamlines the grievance redressal process.
+ResolveNow is an online complaint management platform built using the MERN stack (MongoDB, Express.js, React, Node.js). It allows users to file, track, and manage complaints seamlessly, promoting transparency and efficient resolution.
