@@ -12,7 +12,24 @@ const PORT = process.env.PORT || 3001;
 
 /**************************************** */
 app.use(express.json());
-app.use(cors());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log('Headers:', req.headers);
+  if (req.body && Object.keys(req.body).length > 0) {
+    console.log('Body:', req.body);
+  }
+  next();
+});
+
+// Configure CORS for production - allow all origins for now
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Root route for health check
 app.get('/', (req, res) => {
