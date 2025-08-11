@@ -13,6 +13,12 @@ const PORT = process.env.PORT || 3001;
 /**************************************** */
 app.use(express.json());
 app.use(cors());
+
+// Root route for health check
+app.get('/', (req, res) => {
+  res.json({ message: 'ComplaintCare Backend API is running!', status: 'OK' });
+});
+
 /********************************************** */
 
 /******************message *******************************/
