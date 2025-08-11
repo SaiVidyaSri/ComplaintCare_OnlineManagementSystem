@@ -5,6 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Alert from 'react-bootstrap/Alert';
 import Footer from '../common/FooterC'
 import axios from 'axios';
+import API_BASE from '../../config/api';
 
 const AccordionAdmin = () => {
   const [complaintList, setComplaintList] = useState([]);
@@ -12,7 +13,7 @@ const AccordionAdmin = () => {
   useEffect(() => {
     const getComplaints = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/status');
+        const response = await axios.get(`${API_BASE}/status`);
         const complaints = response.data;
         setComplaintList(complaints);
       } catch (error) {
@@ -23,7 +24,7 @@ const AccordionAdmin = () => {
 
     const getAgentsRecords = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/AgentUsers');
+        const response = await axios.get(`${API_BASE}/AgentUsers`);
         const agents = response.data;
         setAgentList(agents);
       } catch (error) {
@@ -36,7 +37,7 @@ const AccordionAdmin = () => {
 
   const handleSelection = async (agentId, complaintId, status, agentName) => {
     try {
-      await axios.get(`http://localhost:8000/AgentUsers/${agentId}`);
+      await axios.get(`${API_BASE}/AgentUsers/${agentId}`);
       const assignedComplaint = {
         agentId,
         complaintId,
@@ -44,7 +45,7 @@ const AccordionAdmin = () => {
         agentName,
       };
 
-      await axios.post('http://localhost:8000/assignedComplaints', assignedComplaint);
+      await axios.post(`${API_BASE}/assignedComplaints`, assignedComplaint);
       const updatedComplaintList = complaintList.filter((complaint) => complaint.id !== complaintId);
       setComplaintList(updatedComplaintList);
       alert(`Compliant assigned to the Agent ${agentName}`)

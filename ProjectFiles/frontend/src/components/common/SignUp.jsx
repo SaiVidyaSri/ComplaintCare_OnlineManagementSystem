@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Image3 from '../../Images/Image3.jpg';
 import Footer from './FooterC'
+import API_BASE from '../../config/api';
 const SignUp = () => {
    const [title, setTitle] = useState("Select User")
    const [user, setUser] = useState({
@@ -27,7 +28,7 @@ const SignUp = () => {
    const handleSubmit = async (e) => {
       e.preventDefault()
       const updatedUser = { ...user, userType: title };
-      axios.post("http://localhost:8000/SignUp", updatedUser)
+      axios.post(`${API_BASE}/SignUp`, updatedUser)
          .then((res) => {
             alert("record submitted")
             JSON.stringify(res.data.user)

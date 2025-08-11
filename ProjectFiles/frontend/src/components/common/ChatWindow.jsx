@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
+import API_BASE from '../../config/api';
 
 
 const ChatWindow = (props) => {
@@ -10,7 +11,7 @@ const ChatWindow = (props) => {
 
    const fetchMessageList = async () => {
       try {
-         const response = await axios.get(`http://localhost:8000/messages/${props.complaintId}`);
+         const response = await axios.get(`${API_BASE}/messages/${props.complaintId}`);
          setMessageList(response.data);
       } catch (error) {
          console.error('Error fetching messages:', error);
@@ -33,7 +34,7 @@ const ChatWindow = (props) => {
             message: messageInput,
             complaintId: props.complaintId
          }
-         const response = await axios.post('http://localhost:8000/messages', data)
+         const response = await axios.post(`${API_BASE}/messages`, data)
          setMessageList([...messageList, response.data]);
          setMessageInput('');
          fetchMessageList();

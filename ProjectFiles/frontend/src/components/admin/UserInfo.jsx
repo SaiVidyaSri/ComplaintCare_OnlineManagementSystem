@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Footer from '../common/FooterC'
 
 import axios from 'axios';
+import API_BASE from '../../config/api';
 
 const UserInfo = () => {
    const navigate = useNavigate();
@@ -33,7 +34,7 @@ const UserInfo = () => {
       }
       else {
          window.confirm("Are you sure you want to Update the user?");
-         axios.put(`http://localhost:8000/user/${user_id}`, updateUser)
+         axios.put(`${API_BASE}/user/${user_id}`, updateUser)
             .then((res) => {
                alert(`user updated successfully`)
                JSON.stringify(res.data)
@@ -47,7 +48,7 @@ const UserInfo = () => {
    useEffect(() => {
       const getOrdinaryRecords = async () => {
          try {
-            const response = await axios.get('http://localhost:8000/OrdinaryUsers');
+            const response = await axios.get(`${API_BASE}/OrdinaryUsers`);
             const ordinary = response.data;
             setOrdinaryList(ordinary)
          } catch (error) {
@@ -61,7 +62,7 @@ const UserInfo = () => {
       try {
          const confirmed = window.confirm("Are you sure you want to delete the user?");
          if (confirmed) {
-            await axios.delete(`http://localhost:8000/OrdinaryUsers/${userId}`);
+            await axios.delete(`${API_BASE}/OrdinaryUsers/${userId}`);
             setOrdinaryList(ordinaryList.filter((user) => user._id !== userId));
          }
       } catch (error) {

@@ -8,6 +8,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import Collapse from 'react-bootstrap/Collapse';
+import API_BASE from '../../config/api';
 import ChatWindow from '../common/ChatWindow';
 import Footer from '../common/FooterC'
 
@@ -28,7 +29,7 @@ const AgentHome = () => {
             if (user) {
                const { _id, name } = user;
                setUserName(name);
-               const response = await axios.get(`http://localhost:8000/allcomplaints/${_id}`);
+               const response = await axios.get(`${API_BASE}/allcomplaints/${_id}`);
                const complaints = response.data;
                setAgentComplaintList(complaints);
             } else {
@@ -44,7 +45,7 @@ const AgentHome = () => {
 
    const handleStatusChange = async (complaintId) => {
       try {
-         await axios.put(`http://localhost:8000/complaint/${complaintId}`, { status: 'completed' });
+         await axios.put(`${API_BASE}/complaint/${complaintId}`, { status: 'completed' });
          setAgentComplaintList((prevComplaints) =>
             prevComplaints.map((complaint) =>
                complaint._doc.complaintId === complaintId ? { ...complaint, _doc: { ...complaint._doc, status: 'completed' } } : complaint

@@ -5,6 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import { Button } from 'react-bootstrap';
 import ChatWindow from '../common/ChatWindow';
 import Collapse from 'react-bootstrap/Collapse';
+import API_BASE from '../../config/api';
 
 const Status = () => {
   const [toggle, setToggle] = useState({})
@@ -14,7 +15,7 @@ const Status = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     
     const { _id } = user;
-    axios.get(`http://localhost:8000/status/${_id}`)
+    axios.get(`${API_BASE}/status/${_id}`)
       .then((res) => {
         setStatusCompliants(res.data);
       })
